@@ -10,11 +10,12 @@ function createBot() {
   console.log('[*] Connecting to server...');
   
   const bot = mineflayer.createBot({
-    host: settings.server.ip,
-    port: settings.server.port,
-    username: settings['bot-account'].username,
-    version: settings.server.version === "false" || !settings.server.version ? false : settings.server.version,
-    checkTimeoutInterval: 60 * 1000,
+    host: settings.server.ip.trim(),
+    port: parseInt(settings.server.port) || 25565,
+    username: settings['bot-account'].username || 'AFK_Bot',
+    version: '1.21',
+    checkTimeoutInterval: 90 * 1000,
+    keepAlive: true,
     hideErrors: false
   });
 
@@ -22,7 +23,6 @@ function createBot() {
     console.log(`[+] ${bot.username} successfully joined!`);
     botState.connected = true;
 
-    // Anti-AFK მოქმედებები
     setInterval(() => {
       if (!bot || !botState.connected) return;
       try {
@@ -33,17 +33,13 @@ function createBot() {
   });
 
   bot.on('end', (reason) => {
-    console.log(`[-] Disconnected (${reason}). Reconnecting in 15s...`);
+    console.log(`[-] Disconnected (${reason}). Reconnecting in 10s...`);
     botState.connected = false;
-    setTimeout(createBot, 15000); // 15 წამიანი პაუზა ბლოკის ასარიდებლად
+    setTimeout(createBot, 10000);
   });
 
   bot.on('error', (err) => {
-    if (err.code === 'ECONNRESET') {
-      console.log('[!] Connection reset by Aternos. Retrying in 15s...');
-    } else {
-      console.log('[!] Bot error:', err.message);
-    }
+    console.log('[!] Bot error:', err.message);
   });
 }
 
