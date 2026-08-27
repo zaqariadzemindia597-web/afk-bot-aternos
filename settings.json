@@ -8,7 +8,7 @@
   "server": {
     "ip": "Survivalgeo.aternos.me",
     "port": 44091,
-    "version": "1.21.1"
+    "version": "1.21"
   },
   "position": {
     "enabled": true,
