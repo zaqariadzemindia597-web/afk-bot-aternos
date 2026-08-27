@@ -1,4 +1,5 @@
-      try {bot.pathfinder.setMovements(defaultMove);
+try {
+      bot.pathfinder.setMovements(defaultMove);
       bot.pathfinder.setGoal(new GoalBlock(Math.floor(x), Math.floor(bot.entity.position.y), Math.floor(z)));
       angle += Math.PI / 4;
       botState.lastActivity = Date.now();
