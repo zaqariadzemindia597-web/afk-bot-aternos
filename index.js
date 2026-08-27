@@ -1,3 +1,10 @@
+const config = require('./config.json');
+const botState = {
+  connected: false,
+  lastActivity: Date.now(),
+  errors: []
+};
+
 function startCircleWalk(bot) {
   addInterval(() => {
     if (!bot || !botState.connected) return;
