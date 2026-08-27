@@ -1,4 +1,7 @@
-try {
+function startCircleWalk(bot) {
+  addInterval(() => {
+    if (!bot || !botState.connected) return;
+    try {
       bot.pathfinder.setMovements(defaultMove);
       bot.pathfinder.setGoal(new GoalBlock(Math.floor(x), Math.floor(bot.entity.position.y), Math.floor(z)));
       angle += Math.PI / 4;
@@ -8,6 +11,7 @@ try {
     }
   }, config.movement['circle-walk'].speed);
 }
+
 
 function startRandomJump(bot) {
   addInterval(() => {
